@@ -57,6 +57,7 @@ The second question is inferential, they seek to find the relationship of the re
 library(tidymodels)
 library(tidyverse)
 library(ISLR)
+library(corrplot)
 ```
 
 Exercise 1:
@@ -104,3 +105,17 @@ boxplot(hwy~cyl, xlab= "Number of Cylinders", ylab = "Highway Miles per Gallon")
 ```
 
 As the number of cylinders increases the Highway miles per gallon decreases -- the average highway miles per gallon decreases. 
+
+
+
+Exercise 5:
+
+```{r, echo = FALSE}
+
+
+mpg_sm <- mpg %>% select(where(is.numeric)) %>% cor(.) %>% corrplot(.,method = 'number', type = 'lower')
+
+```
+
+There exists a positive correlation between: highway miles per gallon and city miles per gallon, number of cylinders and engine displacement. There exists a negative correlation between: city miles per gallon and engine displacement, city miles per gallon and number of cyliners, highway miles per gallon and engine displacement, highway miles per gallon and number of cylinders. 
+
