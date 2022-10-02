@@ -1,0 +1,106 @@
+---
+title: "Homework 1"
+author: "Erasmo Rivas"
+date: "2022-10-02"
+output: pdf_document
+---
+
+---
+title: "Pstat131 Hw1"
+author: "erasmo-rivas"
+date: '2022-09-30'
+output: html_document
+---
+
+Question 1:
+
+Supervised learning is the application of statistical lerning methods to data, in order to extract useful patterns within the data. Unsupervised learning is the application of statistical learning methods to data, in order to identify clusters in the data. The difference, is that in supervised learning we have some response variable to help train our models, in unsupervised learning we do not have this supervisor.
+
+Question 2:
+
+A regression model would be used when our response is continuous and classification model would be used when our response is discrete (categorical). 
+
+Question 3:
+
+Two common metric for regression machine learning problems are training mean squared error (training MSE) and test mean squared error (test MSE). Two common metrics for classification machine learning methods are training error rate and test error rate.
+
+Question 4:
+
+
+Each of the following models prioritizes a goal for the statistical model.
+
+Descriptive Models:
+This model is to visually emphasize a trend in the data.
+
+Inferential Models:
+This model seeks to investigate relationships between outcome and predictors, to test theories, and discover potential causal relationships.
+
+Predictive Models:
+This model aims to predict Y, that is reduce test MSE. This method will look for the best combination of predictors to predict Y.
+
+Question 5:
+
+
+In a mechanistic model assumptions are made of the form of f, the relationship between the response and the predictors. In empirically driven no such assumption are made about the form of f. Mechanistic models are less flexible than empirically driven models. Mechanistic models tend to be more interpretable, the functional form that is assumed generally comes with easier interpretation. Empirically driven models (being more flexible) tend to fit data better -- this causes bias to be low, however the variance can be high. With Mechanistic models, bias is generally higher however variance is low. 
+
+Question 6:
+
+
+the first question would be predictive, that is from the predictors (voter's profile) we want to predict the likelihood they vote in favor of a given candidate. 
+
+The second question is inferential, they seek to find the relationship of the response (voter's likelihood f support od a candidate) to a predictor (personal contact with candidate).
+
+
+
+
+```{r, echo=FALSE, results = FALSE}
+library(tidymodels)
+library(tidyverse)
+library(ISLR)
+```
+
+Exercise 1:
+
+
+```{r, echo = FALSE}
+hwy <- mpg$hwy 
+hist(hwy, main = "Histogram of Highway Miles Per Gallon", xlab = "Highway Miles Per Gallon")
+```
+
+The majority of the data points fall within a 15-30 miles per gallon. 
+
+Exercise 2:
+
+
+```{r, echo = FALSE}
+cty <- mpg$cty
+plot(hwy,cty, xlab = "Highway Miles per Gallon", ylab = "City Miles per Gallon")
+
+```
+
+There seems to be some positive relationship, as highway miles per gallon increase city miles per gallon increases. 
+
+
+Exercise 3:
+
+
+```{r, echo=FALSE}
+# manu <- mpg$manufacturer
+manu <- mpg %>% group_by(manufacturer) %>%  summarise(count = n()) %>% arrange(count)
+par(las = 2)
+
+barplot(manu$count, horiz = TRUE, names.arg = manu$manufacturer, cex.names = 0.65)
+```
+
+Dodge produced the most cars. Lincoln produced the least amount of cars. 
+
+Exercise 4:
+
+
+```{r, echo = FALSE}
+cyl <- mpg$cyl 
+boxplot(hwy~cyl, xlab= "Number of Cylinders", ylab = "Highway Miles per Gallon")
+
+```
+
+As the number of cylinders increases the Highway miles per gallon decreases -- the average highway miles per gallon decreases. 
